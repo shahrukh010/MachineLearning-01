@@ -156,7 +156,7 @@ for i,row in feature_important.iterrows():
 # Model Evaluation Metrics
 print("\nModel Evaluation Metrics")
 from sklearn.metrics import mean_absolute_error,mean_squared_error
-mae =mean_absolute_error(Y_test,y_predict) # i.e average error in prediction
+mae =mean_absolute_error(Y_test,y_predict) # i.e average error in prediction[you're off by ${mae} per car]
 mse = mean_squared_error(Y_test,y_predict)
 rmse = np.sqrt(mse)
 r2 = model.score(X_test,Y_test)
@@ -164,6 +164,12 @@ print(f"Mean Absolute Error (MAE): {mae}")
 print(f"Mean Squared Error (MSE): {mse}")
 print(f"Root Mean Square Error {rmse}")
 print(f"R^2 Score: {r2}")
+
+# Benchmark against average car price
+average_price = Y_test.mean()
+mae_percentage = (mae / average_price)*100
+print(f"Average Car Price in Test Set: {average_price:,.2f}")
+print(f"MAE as Percentage of Average Price : {mae_percentage:,.2f}")
 
 
 
